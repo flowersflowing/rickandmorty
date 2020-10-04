@@ -17,31 +17,48 @@ let llamadoPersonajes = (() => {
         }
     };
 
-    // let obtenerDetalles = async (id) => {
-
-    // };
+    let obtenerDetalles = async (id) => {
+        const urlPje = `https://rickandmortyapi.com/api/character/${id}`;
+        let datosPje;
+        try {
+            let resPje = await fetch(urlPje);
+            let datos = await resPje.json();
+            datosPersons = datos;
+            let detallesPersonajes = new DetallesPersonajes(datosPersons.id, datosPersons.species);
+            detallesPersonajes.infoGeneral(datosPersons.id, datosPersons.species);
+            return datos;
+            } catch (error) {
+            console.error(error);
+        }
+    };
 
     return {
         mostrar: async () => {
             const personajes = await obtenerPersonajes();
+            const detalles = await obtenerDetalles();
             const respuestaPersonajes = await personajes.results;
-            respuestaPersonajes.forEach((pers) => {
-                resultados.innerHTML += `
-                <section>
-                    <img src=${pers.image}>
-                    <div class=per id=${pers.id}>
-                        <ul>
-                            <li>
-                                <span>${pers.id}</span>
-                            </li>
-                            <li>
-                                <span>${pers.species}</span>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-                `;
-            });
+            const respuestaDetalles = await detalles.results;
+
+            infoGeneral()
+            infoModal()
+            // Esto se va a infoGeneral():
+            // respuestaPersonajes.forEach((pers) => {
+            //     resultados.innerHTML += `
+            //     <section>
+            //         <img src=${pers.image}>
+            //         <div class=per id=${pers.id}>
+            //             <ul>
+            //                 <li>
+            //                     <span>${pers.id}</span>
+            //                 </li>
+            //                 <li>
+            //                     <span>${pers.species}</span>
+            //                 </li>
+            //             </ul>
+            //         </div>
+            //     </section>
+            //     `;
+            // });
         }
     }
 })();

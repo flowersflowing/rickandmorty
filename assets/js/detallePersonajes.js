@@ -46,21 +46,40 @@ export class DetallePersonajes extends Personajes {
         }        
 
         infoGeneral() {
-            return `
-            <ul>
-                <li><p>${this.id}</p></li>
-                <li><p>${this.species}</p></li>
-            </ul>
-            `;
+            respuestaPersonajes.forEach((pers) => {
+                resultados.innerHTML += `
+                <section>
+                    <img src=${pers.image}>
+                    <div class=per id=${pers.id}>
+                        <ul>
+                            <li>
+                                <span>${pers.id}</span>
+                            </li>
+                            <li>
+                                <span>${pers.species}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                `;
+            });
+            // return `
+            // <ul>
+            //     <li><p>${this.id}</p></li>
+            //     <li><p>${this.species}</p></li>
+            // </ul>
+            // `;
         }
 
         infoModal() {
-            return `
-            <ul>
-                <li><p>${this.name}</p></li>
-                <li><p>${this.status}</p></li>
-            </ul>
-            `;
+            respuestaDetalles.forEach(pers) => {
+                resultados.innerHTML += `
+                <ul>
+                    <li><p>${this.name}</p></li>
+                    <li><p>${this.status}</p></li>
+                </ul>                
+                `;
+            }
         }
     }
 

@@ -1,7 +1,5 @@
 import {DetallePersonajes} from '../../assets/js/detallePersonajes.js';
 
-let personaje1 = new DetallePersonajes();
-
 let llamadoPersonajes = (() => {
     const urlAPI = "https://rickandmortyapi.com/api/character/";
     const resultados = document.getElementById("resultado");
@@ -19,15 +17,29 @@ let llamadoPersonajes = (() => {
         }
     };
 
+    // let obtenerDetalles = async (id) => {
+
+    // };
+
     return {
         mostrar: async () => {
             const personajes = await obtenerPersonajes();
             const respuestaPersonajes = await personajes.results;
             respuestaPersonajes.forEach((pers) => {
                 resultados.innerHTML += `
-                <div>
-                    <img src="${pers.image}">
-                <div>
+                <section>
+                    <img src=${pers.image}>
+                    <div class=per id=${pers.id}>
+                        <ul>
+                            <li>
+                                <span>${pers.id}</span>
+                            </li>
+                            <li>
+                                <span>${pers.species}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
                 `;
             });
         }
@@ -37,6 +49,8 @@ let llamadoPersonajes = (() => {
 setTimeout(() => {
     let spinner = document.getElementById("spinner");
     spinner.style.display = "none";
+    let cantidadPersonajes = document.getElementsByClassName("per").length;
+    document.getElementById("cantidadPersonajes").innerHTML = `${cantidadPersonajes}`;
 }, 2000);
 
 llamadoPersonajes.mostrar();

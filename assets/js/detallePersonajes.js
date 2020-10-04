@@ -37,6 +37,14 @@ export class DetallePersonajes extends Personajes {
             this._species = nuevo_species;
         }
 
+        get gender() {
+            return this._gender;
+            }
+        
+        set gender(nuevo_gender) {
+            this._gender = nuevo_gender;
+        }        
+
         infoGeneral() {
             return `
             <ul>
